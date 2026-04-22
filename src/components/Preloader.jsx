@@ -21,7 +21,7 @@ const Preloader = ({ onComplete }) => {
         const loadAndDecode = async (i) => {
             const img = new Image();
             const paddedIndex = i.toString().padStart(3, '0');
-            const extension = (i === 1 || i === TOTAL_FRAMES || i === TOTAL_FRAMES - 1) ? 'png' : 'jpg';
+            const extension = 'jpg'; // Changed from conditional png to consistent jpg
             img.src = `/assets/HeroSection/ezgif-frame-${paddedIndex}.${extension}`;
             
             try {
@@ -29,7 +29,8 @@ const Preloader = ({ onComplete }) => {
                 await img.decode();
                 globalImageCache[i - 1] = img;
             } catch (err) {
-                console.warn(`Failed to decode frame ${i}:`, err);
+                console.error(`Preloader: Failed to load/decode frame ${i} at ${img.src}:`, err);
+                // Fallback: try to load without decoding if decode fails
                 globalImageCache[i - 1] = img;
             } finally {
                 imagesLoaded++;
