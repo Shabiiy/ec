@@ -22,7 +22,7 @@ const Preloader = ({ onComplete }) => {
             const img = new Image();
             const paddedIndex = i.toString().padStart(3, '0');
             const extension = (i === 1 || i === TOTAL_FRAMES || i === TOTAL_FRAMES - 1) ? 'png' : 'jpg';
-            img.src = `/assets/HeroSection/ezgif-frame-${paddedIndex}.${extension}`;
+            img.src = `/HeroSequence/ezgif-frame-${paddedIndex}.${extension}`;
             
             try {
                 // Off-main-thread decoding to prevent jank
