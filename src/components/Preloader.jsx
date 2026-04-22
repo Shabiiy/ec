@@ -35,16 +35,14 @@ const Preloader = ({ onComplete }) => {
                 imagesLoaded++;
                 
                 // Track critical set for initial reveal
-                if (i <= PRELOAD_THRESHOLD) {
-                    criticalLoaded++;
-                }
+                // Removed early reveal - now waiting for 100% completion as requested
 
                 // Update progress label based on TOTAL_FRAMES to keep UX consistent
                 const progressPercentage = Math.floor((imagesLoaded / TOTAL_FRAMES) * 100);
                 setProgress(progressPercentage);
 
-                // Reveal site early if critical frames are ready
-                if (criticalLoaded === PRELOAD_THRESHOLD && !hasUnblocked.current) {
+                // Reveal site only when ALL frames are ready
+                if (imagesLoaded === TOTAL_FRAMES && !hasUnblocked.current) {
                     hasUnblocked.current = true;
                     revealSite();
                 }
