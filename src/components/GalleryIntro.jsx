@@ -91,7 +91,7 @@ const GalleryIntro = () => {
             <div className="narrative-box right-bottom" ref={bioBoxRef} style={{ 
                 position: 'absolute', 
                 bottom: '10%', 
-                right: '5%', 
+                right: '2%', 
                 maxWidth: '450px', 
                 zIndex: 12,
                 color: '#E6D6BC',

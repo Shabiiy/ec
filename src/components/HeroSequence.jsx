@@ -119,6 +119,7 @@ const HeroSequence = () => {
         let ctxAnim = gsap.context(() => {
             const tl = gsap.timeline({
                 scrollTrigger: {
+                    id: 'hero-trigger',
                     trigger: containerRef.current,
                     start: 'top top',
                     end: '+=1000%', 

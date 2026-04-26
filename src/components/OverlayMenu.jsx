@@ -21,10 +21,22 @@ const OverlayMenu = ({ isOpen, setIsMenuOpen }) => {
                 // 3. Jump to the section instantly while hidden
                 let targetScroll = -1;
                 
-                if (targetId === 'updates' || targetId === 'contacts') {
-                    const st = ScrollTrigger.getById(`${targetId}-trigger`);
+                if (targetId === 'about') {
+                    // Jump to the last frame of the hero sequence where "About Us" lives (snap point 1)
+                    const st = ScrollTrigger.getById('hero-trigger');
                     if (st) {
-                        targetScroll = st.end - 150; // Lands slightly higher so title has breathing room from top
+                        targetScroll = st.end;
+                    }
+                } else if (targetId === 'updates') {
+                    // FloatingGallery has no pin — scroll directly to the #updates element
+                    const el = document.getElementById('updates');
+                    if (el) {
+                        targetScroll = el.getBoundingClientRect().top + window.scrollY;
+                    }
+                } else if (targetId === 'contacts') {
+                    const st = ScrollTrigger.getById(`contacts-trigger`);
+                    if (st) {
+                        targetScroll = st.end - 150;
                     }
                 }
                 
