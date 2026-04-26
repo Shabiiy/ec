@@ -123,7 +123,9 @@ const HeroSequence = () => {
                     start: 'top top',
                     end: '+=1000%', 
                     pin: true,
-                    scrub: 0.8,
+                    scrub: 0.5,
+                    fastScrollEnd: true,
+                    preventOverlaps: true,
                     snap: {
                         snapTo: [0, 0.25, 0.5, 0.75, 1], 
                         duration: { min: 0.6, max: 1.2 },
@@ -218,9 +220,9 @@ const HeroSequence = () => {
             </div>
 
             <div className="abs-text bottom-right">
-                <div ref={text3Ref} className="about-block">
-                    <h3 className="about-title color-brown">About Us</h3>
-                    <p className="about-desc color-brown">
+                <div ref={text3Ref} className="about-block" style={{ position: 'relative' }}>
+                    <h3 className="about-title" style={{ color: '#E6D6BC' }}>About Us</h3>
+                    <p className="about-desc" style={{ color: '#E6D6BC' }}>
                         Earthcraft is a design and construction studio focused on creating sustainable, low-impact homes and lifestyle spaces. It combines thoughtful design, functionality, and wellness to shape modern living environments. The brand guides clients toward eco-conscious choices while emphasizing comfort and community. With a strong commitment to sustainability, Earthcraft aims to redefine how style and responsibility coexist.
                     </p>
                 </div>

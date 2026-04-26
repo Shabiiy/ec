@@ -21,7 +21,7 @@ const ContactPortal = () => {
                 end: "+=100%",
                 pin: true,
                 pinSpacing: false,
-                scrub: 0.8,
+                scrub: 0.5,
                 fastScrollEnd: true,
                 preventOverlaps: true
             }

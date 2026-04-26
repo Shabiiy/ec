@@ -174,11 +174,11 @@ const CustomCursor = () => {
                     position: 'fixed', 
                     top: 0, left: 0, 
                     width: '100vw', height: '100vh', 
-                    zIndex: 9998 
+                    zIndex: 200001 
                 }} 
             />
-            <div ref={cursorRef} className="custom-cursor" style={{ zIndex: 9999 }}></div>
-            <div ref={glowRef} className="cursor-glow" style={{ zIndex: 9998 }}></div>
+            <div ref={cursorRef} className="custom-cursor" style={{ zIndex: 200003 }}></div>
+            <div ref={glowRef} className="cursor-glow" style={{ zIndex: 200002 }}></div>
         </>
     );
 };

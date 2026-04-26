@@ -5,7 +5,17 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 export const TOTAL_FRAMES = 240;
-export const PRELOAD_THRESHOLD = 30; // Initial frames to unblock the site
+export const EXTRA_ASSETS = [
+    "/EC logo.png",
+    "/Gallery/Design & Advisory Services.png",
+    "/Gallery/ThomsonsCasa.png",
+    "/Gallery/Hospitality & Lifetyle Spaces.png",
+    "/Gallery/Thottam.png",
+    "/Gallery/Residential Spaces.png",
+    "/Gallery/Zaitoon.png",
+    "/assets/CEO.png"
+];
+export const TOTAL_ASSETS = TOTAL_FRAMES + EXTRA_ASSETS.length;
 export const globalImageCache = [];
 
 const Preloader = ({ onComplete }) => {
@@ -14,38 +24,43 @@ const Preloader = ({ onComplete }) => {
     const hasUnblocked = useRef(false);
 
     useEffect(() => {
-        // document.body.style.overflow = "hidden"; // Removed as per request to avoid scroll-breaking CSS
-        let imagesLoaded = 0;
-        let criticalLoaded = 0;
+        let assetsLoaded = 0;
 
-        const loadAndDecode = async (i) => {
+        const trackProgress = () => {
+            assetsLoaded++;
+            const progressPercentage = Math.floor((assetsLoaded / TOTAL_ASSETS) * 100);
+            setProgress(progressPercentage);
+
+            if (assetsLoaded === TOTAL_ASSETS && !hasUnblocked.current) {
+                hasUnblocked.current = true;
+                revealSite();
+            }
+        };
+
+        const loadFrame = async (i) => {
             const img = new Image();
             const paddedIndex = i.toString().padStart(3, '0');
             const extension = (i === 1 || i === TOTAL_FRAMES || i === TOTAL_FRAMES - 1) ? 'png' : 'jpg';
             img.src = `/HeroSequence/ezgif-frame-${paddedIndex}.${extension}`;
             
             try {
-                // Off-main-thread decoding to prevent jank
                 await img.decode();
                 globalImageCache[i - 1] = img;
             } catch (err) {
-                console.warn(`Failed to decode frame ${i}:`, err);
                 globalImageCache[i - 1] = img;
             } finally {
-                imagesLoaded++;
-                
-                // Track critical set for initial reveal
-                // Removed early reveal - now waiting for 100% completion as requested
+                trackProgress();
+            }
+        };
 
-                // Update progress label based on TOTAL_FRAMES to keep UX consistent
-                const progressPercentage = Math.floor((imagesLoaded / TOTAL_FRAMES) * 100);
-                setProgress(progressPercentage);
-
-                // Reveal site only when ALL frames are ready
-                if (imagesLoaded === TOTAL_FRAMES && !hasUnblocked.current) {
-                    hasUnblocked.current = true;
-                    revealSite();
-                }
+        const loadExtra = async (src) => {
+            const img = new Image();
+            img.src = src;
+            try {
+                await img.decode();
+            } catch (err) {
+            } finally {
+                trackProgress();
             }
         };
 
@@ -55,44 +70,28 @@ const Preloader = ({ onComplete }) => {
                 duration: 1.2, 
                 ease: "power2.inOut",
                 onComplete: () => {
-                    preloaderRef.current.style.display = 'none';
-                    // document.body.style.overflow = "auto";
+                    if (preloaderRef.current) preloaderRef.current.style.display = 'none';
                     ScrollTrigger.refresh();
+                    if (window.pauseSplashCursor) window.pauseSplashCursor(false);
                     if (onComplete) onComplete();
                 }
             });
         };
 
-        // Initialize cache array
-        globalImageCache.length = TOTAL_FRAMES;
-
-        // Prioritized loading: Load critical frames first
-        const loadSequentially = async () => {
-            // Preload Logo
-            const logo = new Image();
-            logo.src = "/EC logo.png";
-            try { await logo.decode(); } catch(e) {}
-
-            // Group 1: Critical (First 30)
-            const criticalPromises = [];
-            for (let i = 1; i <= PRELOAD_THRESHOLD; i++) {
-                criticalPromises.push(loadAndDecode(i));
+        const startLoading = async () => {
+            // 1. Load Frames
+            const framePromises = [];
+            for (let i = 1; i <= TOTAL_FRAMES; i++) {
+                framePromises.push(loadFrame(i));
             }
-            await Promise.all(criticalPromises);
 
-            // Group 2: Background (The rest)
-            // We load these in smaller batches to avoid saturating the network/CPU
-            const BATCH_SIZE = 10;
-            for (let i = PRELOAD_THRESHOLD + 1; i <= TOTAL_FRAMES; i += BATCH_SIZE) {
-                const batch = [];
-                for (let j = 0; j < BATCH_SIZE && (i + j) <= TOTAL_FRAMES; j++) {
-                    batch.push(loadAndDecode(i + j));
-                }
-                await Promise.all(batch);
-            }
+            // 2. Load Extra Assets
+            const extraPromises = EXTRA_ASSETS.map(src => loadExtra(src));
+
+            await Promise.all([...framePromises, ...extraPromises]);
         };
 
-        loadSequentially();
+        startLoading();
 
     }, [onComplete]);
 

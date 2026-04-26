@@ -24,7 +24,7 @@ const OverlayMenu = ({ isOpen, setIsMenuOpen }) => {
                 if (targetId === 'updates' || targetId === 'contacts') {
                     const st = ScrollTrigger.getById(`${targetId}-trigger`);
                     if (st) {
-                        targetScroll = st.end - 5; // Stop just before unpinning so content is fully visible
+                        targetScroll = st.end - 150; // Lands slightly higher so title has breathing room from top
                     }
                 }
                 

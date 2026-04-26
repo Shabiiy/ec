@@ -73,7 +73,11 @@ const Header = ({ isMenuOpen, setIsMenuOpen }) => {
 
     return (
         <header className="header">
-            <div className="logo pill">
+            <div 
+                className="logo pill" 
+                style={{ cursor: 'pointer' }} 
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            >
                 <span className="hover-circle" aria-hidden="true"></span>
                 <span className="label-stack">
                     <img 
@@ -100,27 +104,27 @@ const Header = ({ isMenuOpen, setIsMenuOpen }) => {
                 </span>
             </div>
             <nav className="nav-links glass">
-                <a href="#" className="pill">
+                <div className="pill" style={{ cursor: 'default' }}>
                     <span className="hover-circle" aria-hidden="true"></span>
                     <span className="label-stack">
                         <span className="pill-label">DESIGN & BUILD</span>
                         <span className="pill-label-hover" aria-hidden="true">DESIGN & BUILD</span>
                     </span>
-                </a>
-                <a href="#" className="pill">
+                </div>
+                <div className="pill" style={{ cursor: 'default' }}>
                     <span className="hover-circle" aria-hidden="true"></span>
                     <span className="label-stack">
                         <span className="pill-label">INTERIORS</span>
                         <span className="pill-label-hover" aria-hidden="true">INTERIORS</span>
                     </span>
-                </a>
-                <a href="#" className="pill">
+                </div>
+                <div className="pill" style={{ cursor: 'default' }}>
                     <span className="hover-circle" aria-hidden="true"></span>
                     <span className="label-stack">
                         <span className="pill-label">COMMUNITIES</span>
                         <span className="pill-label-hover" aria-hidden="true">COMMUNITIES</span>
                     </span>
-                </a>
+                </div>
             </nav>
             <button className="hamburger" aria-label="Menu" onClick={() => setIsMenuOpen(!isMenuOpen)}>
                 <span style={{ transform: isMenuOpen ? 'translateY(14px) rotate(45deg)' : 'none' }}></span>

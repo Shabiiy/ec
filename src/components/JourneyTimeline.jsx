@@ -35,10 +35,12 @@ const JourneyTimeline = () => {
                 trigger: sectionRef.current,
                 start: "top top",
                 end: "bottom bottom",
-                scrub: 1,
+                scrub: 0.5,
                 pin: stickyRef.current,
                 pinSpacing: true, 
-                anticipatePin: 1
+                anticipatePin: 1,
+                fastScrollEnd: true,
+                preventOverlaps: true
             }
         });
 
@@ -60,14 +62,14 @@ const JourneyTimeline = () => {
             // Checkpoint Node
             tl.fromTo(node, 
                 { scale: 0, opacity: 0 },
-                { scale: 1, opacity: 1, duration: 0.1, ease: "back.out(2)" },
+                { scale: 1, opacity: 1, duration: 0.1, ease: "back.out(2)", overwrite: 'auto' },
                 startTime
             );
 
             // Text Content
             tl.fromTo(milestone,
                 { opacity: 0, yPercent: -50, y: 30, filter: 'blur(10px)' },
-                { opacity: 1, yPercent: -50, y: 0, filter: 'blur(0px)', duration: 0.15, ease: "power2.out" },
+                { opacity: 1, yPercent: -50, y: 0, filter: 'blur(0px)', duration: 0.15, ease: "power2.out", overwrite: 'auto' },
                 startTime + 0.02
             );
         });
