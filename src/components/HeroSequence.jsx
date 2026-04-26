@@ -13,7 +13,6 @@ const HeroSequence = () => {
     const targetFrame = useRef(0);
     const currentFrame = useRef(0);
     const text1Ref = useRef(null);
-    const logoRef = useRef(null);
     const text2Ref = useRef(null);
     const hazeRef = useRef(null);
     const text3Ref = useRef(null);
@@ -132,7 +131,7 @@ const HeroSequence = () => {
                         ease: "power2.inOut"
                     },
                     onUpdate: (self) => {
-                        const adjustedProgress = Math.min(1, self.progress / 0.85);
+                        const adjustedProgress = Math.min(1, self.progress / 0.98);
                         targetFrame.current = adjustedProgress * (TOTAL_FRAMES - 1);
                         
                         if (window.pauseSplashCursor) window.pauseSplashCursor(true);
@@ -150,23 +149,23 @@ const HeroSequence = () => {
                 }
             });
 
-            // 1st text + logo: Present at load, slides UP and fades on scroll
-            gsap.set([text1Ref.current, logoRef.current], { opacity: 1, y: 0 });
-            tl.to([text1Ref.current, logoRef.current], 
+            // 1st text: Present at load, slides UP and fades on scroll
+            gsap.set(text1Ref.current, { opacity: 1, y: 0 });
+            tl.to(text1Ref.current, 
                 { opacity: 0, y: -40, duration: 0.2, ease: "power2.in" }, 
                 0.05
             );
 
-            // 2nd text: Precise 4-point interpolation [0.35, 0.45, 0.55, 0.65]
-            // Start Fade In at 0.35, Fully Visible at 0.45, Hold until 0.55, Fade Out by 0.65
+            // 2nd text: Precise 4-point interpolation [0.4, 0.5, 0.6, 0.7]
+            // Start Fade In at 0.4, Fully Visible at 0.5, Hold until 0.6, Fade Out by 0.7
             gsap.set([text2Ref.current, hazeRef.current], { opacity: 0, y: 40 });
             tl.to([text2Ref.current, hazeRef.current], 
                 { opacity: 1, y: 0, duration: 0.1, ease: "power2.out" }, 
-                0.35
+                0.4
             );
             tl.to([text2Ref.current, hazeRef.current], 
                 { opacity: 0, y: -40, duration: 0.1, ease: "power2.in" }, 
-                0.55
+                0.6
             );
 
             // 3rd text: Final beat [0.8, 0.9, 1.0]
@@ -205,8 +204,7 @@ const HeroSequence = () => {
 
             <div className="abs-text top-right">
                 <div className="branding-block">
-                    <img ref={logoRef} src="/EC logo.png" alt="Earthcraft" className="sequence-logo" />
-                    <h1 ref={text1Ref} className="sequence-title tiny color-green">
+                    <h1 ref={text1Ref} className="sequence-title small color-green">
                         Building with nature,<br />Crafting the future
                     </h1>
                 </div>
@@ -220,9 +218,12 @@ const HeroSequence = () => {
             </div>
 
             <div className="abs-text bottom-right">
-                <p ref={text3Ref} className="sequence-title small color-brown">
-                    for a thoughtful planet
-                </p>
+                <div ref={text3Ref} className="about-block">
+                    <h3 className="about-title color-brown">About Us</h3>
+                    <p className="about-desc color-brown">
+                        Earthcraft is a design and construction studio focused on creating sustainable, low-impact homes and lifestyle spaces. It combines thoughtful design, functionality, and wellness to shape modern living environments. The brand guides clients toward eco-conscious choices while emphasizing comfort and community. With a strong commitment to sustainability, Earthcraft aims to redefine how style and responsibility coexist.
+                    </p>
+                </div>
             </div>
         </section>
     );

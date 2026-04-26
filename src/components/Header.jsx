@@ -73,8 +73,31 @@ const Header = ({ isMenuOpen, setIsMenuOpen }) => {
 
     return (
         <header className="header">
-            <div className="logo">
-                <img src="/EC logo.png" alt="Earthcraft Logo" loading="eager" fetchPriority="high" decoding="async" width="120" height="40" />
+            <div className="logo pill">
+                <span className="hover-circle" aria-hidden="true"></span>
+                <span className="label-stack">
+                    <img 
+                        src="/EC logo.png" 
+                        alt="Earthcraft Logo" 
+                        className="pill-label"
+                        loading="eager" 
+                        fetchPriority="high" 
+                        decoding="async" 
+                        width="120" 
+                        height="40" 
+                    />
+                    <img 
+                        src="/EC logo.png" 
+                        alt="Earthcraft Logo" 
+                        className="pill-label-hover"
+                        style={{ filter: 'brightness(0) invert(1)' }}
+                        loading="eager" 
+                        fetchPriority="high" 
+                        decoding="async" 
+                        width="120" 
+                        height="40" 
+                    />
+                </span>
             </div>
             <nav className="nav-links glass">
                 <a href="#" className="pill">

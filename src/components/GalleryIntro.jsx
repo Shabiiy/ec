@@ -9,6 +9,9 @@ const GalleryIntro = () => {
     const wrapRef = useRef(null);
     const shellRef = useRef(null);
     const textRef = useRef(null);
+    const doorTextBgRef = useRef(null);
+    const doorTextFgRef = useRef(null);
+    const cardImgRef = useRef(null);
 
     useEffect(() => {
         const wrap = wrapRef.current;
@@ -117,6 +120,7 @@ const GalleryIntro = () => {
         // GSAP Scroll Animations
         let expandTl = gsap.timeline({
             scrollTrigger: {
+                id: 'updates-trigger',
                 trigger: secRef.current,
                 start: "top top", 
                 end: "+=400%",        
@@ -128,6 +132,8 @@ const GalleryIntro = () => {
         });
 
         expandTl.to(wrap, { scale: 18, duration: 2, ease: "power2.in", force3D: true }, 0);
+        expandTl.to([doorTextBgRef.current, doorTextFgRef.current], { opacity: 0, scale: 1.5, duration: 1, ease: "power2.in", force3D: true }, 0);
+        expandTl.to(cardImgRef.current, { opacity: 0, duration: 0.8, ease: "power2.in" }, 0.2);
         gsap.set(textRef.current, { xPercent: -50, yPercent: -50, scale: 0.95 });
         expandTl.to(textRef.current, { opacity: 1, scale: 1, duration: 1.5, ease: "power3.out", force3D: true }, 1);
 
@@ -143,14 +149,27 @@ const GalleryIntro = () => {
 
     return (
         <section className="native-sec gallery-intro-sequence" ref={secRef}>
-            <div className="pc-card-wrapper" id="people-card" style={{ "--icon": "none", "--grain": "none" }} ref={wrapRef}>
+            <div className="door-text-bg split-text-container" ref={doorTextBgRef} style={{ pointerEvents: 'none', zIndex: 10 }}>
+                <div className="text-row">
+                    <span className="formed-by-serif" style={{ marginRight: '-20px' }}>FOR</span>
+                    <span className="formed-by-serif">MED</span>
+                </div>
+            </div>
+
+            <div className="pc-card-wrapper" id="people-card" style={{ "--icon": "none", "--grain": "none", zIndex: 5 }} ref={wrapRef}>
                 <div className="pc-behind"></div>
                 <div className="pc-card-shell" ref={shellRef}>
                     <section className="pc-card">
-                        <div className="pc-inside"></div>
+                        <div className="pc-inside" ref={cardImgRef}></div>
                     </section>
                 </div>
             </div>
+            
+            <div className="door-text-fg" ref={doorTextFgRef} style={{ pointerEvents: 'none', zIndex: 10 }}>
+                <span className="by-script">By</span>
+                <span className="people-script">People</span>
+            </div>
+
             <h2 id="gallery-reveal-text" className="sequence-title" ref={textRef} style={{ position: 'absolute', top: '50%', left: '50%', opacity: 0 }}>OUR UPDATES</h2>
         </section>
     );

@@ -10,30 +10,37 @@ const ContactPortal = () => {
     const cardRef = useRef(null);
     const portalSecRef = useRef(null);
     const contactSecRef = useRef(null);
+    const textWrapRef = useRef(null);
 
     useEffect(() => {
         let portalTl = gsap.timeline({
             scrollTrigger: {
+                id: 'contacts-trigger',
                 trigger: wrapperRef.current,
                 start: "top top",
-                end: "+=200%",
+                end: "+=100%",
                 pin: true,
+                pinSpacing: false,
                 scrub: 0.8,
                 fastScrollEnd: true,
                 preventOverlaps: true
             }
         });
 
+        // Calculate proportional scale to cover screen
+        const maxDimension = Math.hypot(window.innerWidth, window.innerHeight);
+        const endScale = maxDimension / 80; // 80px is the original initial hole radius
+
         // Animate the radial mask "hole" expansion
         portalTl.to(cardRef.current, {
-            '--hole-radius': '150vw',
+            '--hole-radius': `${80 * endScale}px`,
             duration: 2,
             ease: "power2.in"
         }, 0);
 
-        // Expand the circular text as the hole opens - ensuring it stays OUTSIDE the hole
-        portalTl.to('.portal-text-wrapper', {
-            scale: 25, // Dramatically increased to stay ahead of the 150vw hole expansion
+        // Expand the circular text proportionally
+        portalTl.to(textWrapRef.current, {
+            scale: endScale,
             opacity: 0,
             duration: 2,
             ease: "power2.in"
@@ -59,7 +66,7 @@ const ContactPortal = () => {
     }, []);
 
     return (
-        <div className="portal-and-contact-wrapper" style={{ position: 'relative', width: '100%', minHeight: '100vh' }} ref={wrapperRef}>
+        <div className="portal-and-contact-wrapper" style={{ position: 'relative', width: '100%', height: '200vh' }} ref={wrapperRef}>
             <section className="native-sec contact-sec" ref={contactSecRef}>
                 <h2 className="contact-title">CONTACT</h2>
                 <form className="contact-form" onSubmit={e => e.preventDefault()}>
@@ -83,7 +90,7 @@ const ContactPortal = () => {
 
             <section className="native-sec portal-sequence overlay-portal" ref={portalSecRef}>
                 <div className="bg-portal-card" id="contact-door" ref={cardRef} />
-                <div className="portal-text-wrapper" style={{ 
+                <div className="portal-text-wrapper" ref={textWrapRef} style={{ 
                     position: 'absolute', 
                     top: '50%',
                     left: '50%',

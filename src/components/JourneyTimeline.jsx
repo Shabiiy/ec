@@ -5,11 +5,11 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const JOURNEY_DATA = [
-    { year: '2015', title: 'My first built project', desc: 'A breakthrough in sustainable residential architecture.' },
-    { year: '2018', title: 'Multi-building Complex', desc: 'Scaling our vision to a community-level ecosystem.' },
-    { year: '2019', title: 'Thomason Casa Building', desc: 'Winning international acclaim for biophilic integration.' },
-    { year: '2022', title: 'Kochi Expansion', desc: 'Bringing Earthcraft philosophies to the coastal landscape.' },
-    { year: '2025', title: 'Bangalore Project', desc: 'Redefining the urban skyline with living architectural skins.' }
+    { year: '2015', title: 'My first built project', desc: 'A breakthrough in sustainable residential architecture.', image: '/assets/2015 .png' },
+    { year: '2018', title: 'Multi-building Complex', desc: 'Scaling our vision to a community-level ecosystem.', image: '/assets/2018.png' },
+    { year: '2019', title: 'Thomason Casa Building', desc: 'Winning international acclaim for biophilic integration.', image: '/assets/2019.png' },
+    { year: '2022', title: 'Kochi Expansion', desc: 'Bringing Earthcraft philosophies to the coastal landscape.', image: '/assets/2022.png', imageWidth: '300px' },
+    { year: '2025', title: 'Bangalore Project', desc: 'Redefining the urban skyline with living architectural skins.', image: '/assets/2025.png', imageWidth: '300px' }
 ];
 
 const JourneyTimeline = () => {
@@ -66,8 +66,8 @@ const JourneyTimeline = () => {
 
             // Text Content
             tl.fromTo(milestone,
-                { opacity: 0, y: 30, filter: 'blur(10px)' },
-                { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.15, ease: "power2.out" },
+                { opacity: 0, yPercent: -50, y: 30, filter: 'blur(10px)' },
+                { opacity: 1, yPercent: -50, y: 0, filter: 'blur(0px)', duration: 0.15, ease: "power2.out" },
                 startTime + 0.02
             );
         });
@@ -130,12 +130,17 @@ const JourneyTimeline = () => {
                                 key={i} 
                                 ref={el => milestoneRefs.current[i] = el}
                                 className={`journey-card ${i % 2 === 0 ? 'left' : 'right'}`}
-                                style={{ top: `${(i / (JOURNEY_DATA.length - 1)) * 70 + 15}%` }}
+                                style={{ top: `${(i / (JOURNEY_DATA.length - 1)) * 60 + 22}%` }}
                             >
                                 <div className="card-content">
-                                    <span className="card-year">{item.year}</span>
-                                    <h3 className="card-title">{item.title}</h3>
-                                    <p className="card-desc">{item.desc}</p>
+                                    <div className="card-image-wrapper" style={{ width: item.imageWidth || undefined }}>
+                                        <img src={item.image} alt={item.title} className="card-image" />
+                                    </div>
+                                    <div className="card-text">
+                                        <span className="card-year">{item.year}</span>
+                                        <h3 className="card-title">{item.title}</h3>
+                                        <p className="card-desc">{item.desc}</p>
+                                    </div>
                                 </div>
                             </div>
                         ))}

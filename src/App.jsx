@@ -22,16 +22,26 @@ function App() {
             <CustomCursor />
             
             <Header isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
-            <OverlayMenu isOpen={isMenuOpen} />
+            <OverlayMenu isOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
 
             <main className="main-content">
-                <HeroSequence />
+                <div id="about">
+                    <HeroSequence />
+                </div>
                 
                 <div className="native-content">
-                    <GalleryIntro />
-                    <FloatingGallery />
-                    <JourneyTimeline />
-                    <ContactPortal />
+                    <div id="people">
+                        <GalleryIntro />
+                    </div>
+                    <div id="updates">
+                        <FloatingGallery />
+                    </div>
+                    <div id="journey">
+                        <JourneyTimeline />
+                    </div>
+                    <div id="contacts">
+                        <ContactPortal />
+                    </div>
                 </div>
             </main>
         </>
