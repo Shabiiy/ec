@@ -6,17 +6,17 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const BLOG_DATA = [
-    { id: 1, title: "The Future of Sustainable Urban Living", date: "April 20, 2026", category: "Architecture", image: "/Gallery/Design & Advisory Services.png", excerpt: "Exploring how biophilic design is reshaping our modern cityscapes." },
-    { id: 2, title: "Minimalism in Coastal Interior Design", date: "March 15, 2026", category: "Interiors", image: "/Gallery/ThomsonsCasa.png", excerpt: "How to bring the tranquility of the ocean into your living space." },
-    { id: 3, title: "Reimagining Community Spaces for 2026", date: "Feb 10, 2026", category: "Community", image: "/Gallery/Hospitality & Lifetyle Spaces.png", excerpt: "Designing for connection in an increasingly digital world." },
-    { id: 4, title: "Materials that Breathe: Clay & Wood", date: "Jan 22, 2026", category: "Build", image: "/Gallery/Thottam.png", excerpt: "Returning to ancestral building blocks for modern performance." },
-    { id: 5, title: "Light & Shadow: The Dance of Geometry", date: "Dec 05, 2025", category: "Design", image: "/Gallery/Residential Spaces.png", excerpt: "Using natural light as a primary architectural material." },
-    { id: 6, title: "Wellness-First Architecture Trends", date: "Nov 18, 2025", category: "Wellness", image: "/Gallery/Zaitoon.png", excerpt: "How your home environment impacts your mental and physical health." },
-    { id: 7, title: "The Art of Vernacular Construction", date: "Oct 30, 2025", category: "Craft", image: "/Gallery/Design & Advisory Services.png", excerpt: "Local wisdom meets modern engineering in our latest projects." },
-    { id: 8, title: "Urban Oases: Pocket Gardens", date: "Sept 12, 2025", category: "Sustainability", image: "/Gallery/ThomsonsCasa.png", excerpt: "Bringing nature back to the smallest city footprints." },
-    { id: 9, title: "Circular Economy in the Building Industry", date: "Aug 05, 2025", category: "Build", image: "/Gallery/Hospitality & Lifetyle Spaces.png", excerpt: "Zero-waste construction is no longer a dream." },
-    { id: 10, title: "Restoring Heritage: Modern Tech meets Stone", date: "July 20, 2025", category: "Heritage", image: "/Gallery/Residential Spaces.png", excerpt: "The delicate balance of preserving history while adding modern amenities." },
-    { id: 11, title: "Lighting Design for Cognitive Wellness", date: "June 15, 2025", category: "Design", image: "/Gallery/Zaitoon.png", excerpt: "How light temperature and direction can improve focus and sleep." }
+    { id: 1, title: "The Future of Sustainable Urban Living", date: "April 20, 2026", category: "Architecture", image: "/Gallery/Design & Advisory Services.png?v=2", excerpt: "Exploring how biophilic design is reshaping our modern cityscapes." },
+    { id: 2, title: "Minimalism in Coastal Interior Design", date: "March 15, 2026", category: "Interiors", image: "/Gallery/ThomsonsCasa.png?v=2", excerpt: "How to bring the tranquility of the ocean into your living space." },
+    { id: 3, title: "Reimagining Community Spaces for 2026", date: "Feb 10, 2026", category: "Community", image: "/Gallery/Hospitality & Lifetyle Spaces.png?v=2", excerpt: "Designing for connection in an increasingly digital world." },
+    { id: 4, title: "Materials that Breathe: Clay & Wood", date: "Jan 22, 2026", category: "Build", image: "/Gallery/Thottam.png?v=2", excerpt: "Returning to ancestral building blocks for modern performance." },
+    { id: 5, title: "Light & Shadow: The Dance of Geometry", date: "Dec 05, 2025", category: "Design", image: "/Gallery/Residential Spaces.png?v=2", excerpt: "Using natural light as a primary architectural material." },
+    { id: 6, title: "Wellness-First Architecture Trends", date: "Nov 18, 2025", category: "Wellness", image: "/Gallery/Zaitoon.png?v=2", excerpt: "How your home environment impacts your mental and physical health." },
+    { id: 7, title: "The Art of Vernacular Construction", date: "Oct 30, 2025", category: "Craft", image: "/Gallery/Design & Advisory Services.png?v=2", excerpt: "Local wisdom meets modern engineering in our latest projects." },
+    { id: 8, title: "Urban Oases: Pocket Gardens", date: "Sept 12, 2025", category: "Sustainability", image: "/Gallery/ThomsonsCasa.png?v=2", excerpt: "Bringing nature back to the smallest city footprints." },
+    { id: 9, title: "Circular Economy in the Building Industry", date: "Aug 05, 2025", category: "Build", image: "/Gallery/Hospitality & Lifetyle Spaces.png?v=2", excerpt: "Zero-waste construction is no longer a dream." },
+    { id: 10, title: "Restoring Heritage: Modern Tech meets Stone", date: "July 20, 2025", category: "Heritage", image: "/Gallery/Residential Spaces.png?v=2", excerpt: "The delicate balance of preserving history while adding modern amenities." },
+    { id: 11, title: "Lighting Design for Cognitive Wellness", date: "June 15, 2025", category: "Design", image: "/Gallery/Zaitoon.png?v=2", excerpt: "How light temperature and direction can improve focus and sleep." }
 ];
 
 const FloatingGallery = () => {

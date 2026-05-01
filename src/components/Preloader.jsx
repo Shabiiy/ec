@@ -7,12 +7,12 @@ gsap.registerPlugin(ScrollTrigger);
 export const TOTAL_FRAMES = 240;
 export const EXTRA_ASSETS = [
     "/EC logo.png",
-    "/Gallery/Design & Advisory Services.png",
-    "/Gallery/ThomsonsCasa.png",
-    "/Gallery/Hospitality & Lifetyle Spaces.png",
-    "/Gallery/Thottam.png",
-    "/Gallery/Residential Spaces.png",
-    "/Gallery/Zaitoon.png",
+    "/Gallery/Design & Advisory Services.png?v=2",
+    "/Gallery/ThomsonsCasa.png?v=2",
+    "/Gallery/Hospitality & Lifetyle Spaces.png?v=2",
+    "/Gallery/Thottam.png?v=2",
+    "/Gallery/Residential Spaces.png?v=2",
+    "/Gallery/Zaitoon.png?v=2",
     "/assets/CEO.png"
 ];
 export const TOTAL_ASSETS = TOTAL_FRAMES + EXTRA_ASSETS.length;
