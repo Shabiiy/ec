@@ -100,8 +100,16 @@ const HeroSequence = () => {
 
             const deltaProgress = targetFrame.current - currentFrame.current;
             if (Math.abs(deltaProgress) > 0.0001) {
-                const speed = 0.07 * (dt / 16.67);
-                currentFrame.current += deltaProgress * Math.min(speed, 1);
+                // Tighter lerp speed to track scrub more closely
+                const speed = 0.2 * (dt / 16.67);
+                let step = deltaProgress * Math.min(speed, 1);
+                
+                // Cap the maximum frame jump to prevent "slipping" or skipping too many frames
+                // This ensures the sequence feels continuous even on fast scrolls
+                if (step > 1.2) step = 1.2;
+                if (step < -1.2) step = -1.2;
+
+                currentFrame.current += step;
                 renderFrames(currentFrame.current);
             }
             
@@ -126,8 +134,6 @@ const HeroSequence = () => {
                     end: '+=1500%', 
                     pin: true,
                     scrub: 0.8,
-                    fastScrollEnd: true,
-                    preventOverlaps: true,
                     snap: {
                         snapTo: [0, 60/239, 120/239, 190/239, 1], 
                         duration: { min: 0.6, max: 1.2 },
