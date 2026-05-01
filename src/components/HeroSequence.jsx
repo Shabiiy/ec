@@ -13,6 +13,7 @@ const HeroSequence = () => {
     const targetFrame = useRef(0);
     const currentFrame = useRef(0);
     const text1Ref = useRef(null);
+    const haze1Ref = useRef(null);
     const text2Ref = useRef(null);
     const hazeRef = useRef(null);
     const text3Ref = useRef(null);
@@ -117,66 +118,93 @@ const HeroSequence = () => {
         }, 100);
 
         let ctxAnim = gsap.context(() => {
+            const frameObj = { frame: 0 };
+            
             const tl = gsap.timeline({
                 scrollTrigger: {
                     id: 'hero-trigger',
                     trigger: containerRef.current,
                     start: 'top top',
-                    end: '+=1000%', 
+                    end: '+=2500%', 
                     pin: true,
-                    scrub: 0.5,
+                    scrub: 1.2,
                     fastScrollEnd: true,
                     preventOverlaps: true,
                     snap: {
-                        snapTo: [0, 0.25, 0.5, 0.75, 1], 
+                        snapTo: [0, 2.5/13.5, 5.75/13.5, 9.25/13.5, 1],
                         duration: { min: 0.6, max: 1.2 },
                         delay: 0.1,
                         ease: "power2.inOut"
-                    },
-                    onUpdate: (self) => {
-                        const adjustedProgress = Math.min(1, self.progress / 0.98);
-                        targetFrame.current = adjustedProgress * (TOTAL_FRAMES - 1);
-                        
-                        if (window.pauseSplashCursor) window.pauseSplashCursor(true);
-                        
-                        if (idleTimer.current) clearTimeout(idleTimer.current);
-                        idleTimer.current = setTimeout(() => {
-                            if (window.pauseSplashCursor) window.pauseSplashCursor(false);
-                        }, 150);
                     },
                     onToggle: (self) => {
                         if (!self.isActive && window.pauseSplashCursor) {
                             window.pauseSplashCursor(false);
                         }
                     }
+                },
+                onUpdate: () => {
+                    targetFrame.current = frameObj.frame;
+                    
+                    if (window.pauseSplashCursor) window.pauseSplashCursor(true);
+                    
+                    if (idleTimer.current) clearTimeout(idleTimer.current);
+                    idleTimer.current = setTimeout(() => {
+                        if (window.pauseSplashCursor) window.pauseSplashCursor(false);
+                    }, 150);
                 }
             });
 
             // 1st text: Present at load, slides UP and fades on scroll
-            gsap.set(text1Ref.current, { opacity: 1, y: 0 });
-            tl.to(text1Ref.current, 
-                { opacity: 0, y: -40, duration: 0.2, ease: "power2.in" }, 
-                0.05
+            gsap.set([text1Ref.current, haze1Ref.current], { opacity: 1, y: 0 });
+            tl.to([text1Ref.current, haze1Ref.current], 
+                { opacity: 0, y: -40, duration: 0.5, ease: "power2.in" }, 
+                0
             );
 
-            // 2nd text: Precise 4-point interpolation [0.4, 0.5, 0.6, 0.7]
-            // Start Fade In at 0.4, Fully Visible at 0.5, Hold until 0.6, Fade Out by 0.7
+            // Frame 0 -> 59
+            tl.to(frameObj, { frame: 59, duration: 2, ease: "none" }, 0);
+            
+            // --- HOLD AT FRAME 60 (index 59) ---
+            tl.to(frameObj, { frame: 59, duration: 1, ease: "none" }, 2);
+
+            // Frame 59 -> 119
+            tl.to(frameObj, { frame: 119, duration: 2, ease: "none" }, 3);
+
+            // Text 2 fades in perfectly synchronized with Frame 120 Hold
             gsap.set([text2Ref.current, hazeRef.current], { opacity: 0, y: 40 });
             tl.to([text2Ref.current, hazeRef.current], 
-                { opacity: 1, y: 0, duration: 0.1, ease: "power2.out" }, 
-                0.4
-            );
-            tl.to([text2Ref.current, hazeRef.current], 
-                { opacity: 0, y: -40, duration: 0.1, ease: "power2.in" }, 
-                0.6
+                { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 
+                4.5 
             );
 
-            // 3rd text: Final beat [0.8, 0.9, 1.0]
+            // --- HOLD AT FRAME 120 (index 119) ---
+            tl.to(frameObj, { frame: 119, duration: 1.5, ease: "none" }, 5);
+            
+            // Text 2 fades out as we leave the hold
+            tl.to([text2Ref.current, hazeRef.current], 
+                { opacity: 0, y: -40, duration: 0.5, ease: "power2.in" }, 
+                6 
+            );
+
+            // Frame 119 -> 189
+            tl.to(frameObj, { frame: 189, duration: 2, ease: "none" }, 6.5);
+
+            // --- HOLD AT FRAME 190 (index 189) ---
+            tl.to(frameObj, { frame: 189, duration: 1.5, ease: "none" }, 8.5);
+
+            // Frame 189 -> 239
+            tl.to(frameObj, { frame: 239, duration: 2, ease: "none" }, 10);
+
+            // Text 3 "About Us" fades in perfectly synchronized with Frame 240 Hold
             gsap.set(text3Ref.current, { opacity: 0, y: 20 });
             tl.to(text3Ref.current, 
-                { opacity: 1, y: 0, duration: 0.1, ease: "power2.out" }, 
-                0.8
+                { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 
+                11.5
             );
+
+            // --- HOLD AT FRAME 240 (index 239) ---
+            tl.to(frameObj, { frame: 239, duration: 1.5, ease: "none" }, 12);
+            
         }, containerRef);
 
         return () => {
@@ -207,6 +235,7 @@ const HeroSequence = () => {
 
             <div className="abs-text top-right">
                 <div className="branding-block">
+                    <div ref={haze1Ref} className="text-haze" />
                     <h1 ref={text1Ref} className="sequence-title small color-green">
                         Building with nature,<br />Crafting the future
                     </h1>

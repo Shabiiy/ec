@@ -464,10 +464,12 @@ video {
 .top-right {
     display: flex;
     justify-content: flex-end; /* Push the branding-block to the right edge */
+    align-items: flex-start; /* Prevent stretching so branding-block wraps its content tightly */
     padding: 25vh 1.5vw 0 0;
 }
 
 .branding-block {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: flex-start; /* Left align children within the block */
@@ -995,10 +997,22 @@ video {
 
 .updates-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-    gap: 40px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
     max-width: 1400px;
     margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+    .updates-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .updates-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .blog-card {
@@ -1144,7 +1158,7 @@ video {
 
 .modal-header {
     width: 100%;
-    padding: 40px 5%;
+    padding: 20px 5% 15px; /* Reduced gap */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -1154,16 +1168,17 @@ video {
 
 .modal-title {
     font-family: 'BLT-Heirloom', serif;
-    font-size: 2rem;
+    font-size: 1.5rem; /* Made text smaller */
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--primary-brown);
+    margin: 0;
 }
 
 .modal-close-btn {
     background: none;
     border: none;
-    font-size: 3rem;
+    font-size: 2.2rem; /* Scaled down X to match */
     line-height: 1;
     color: var(--primary-brown);
     cursor: pointer;
