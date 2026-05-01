@@ -170,11 +170,11 @@ const HeroSequence = () => {
                 0.60 
             );
 
-            // 3rd text: "About Us" fades in for Frame 240
+            // 3rd text: "About Us" fades in precisely at Frame 240
             gsap.set(text3Ref.current, { opacity: 0, y: 20 });
             tl.to(text3Ref.current, 
-                { opacity: 1, y: 0, duration: 0.15, ease: "power2.out" }, 
-                0.85 
+                { opacity: 1, y: 0, duration: 0.05, ease: "power2.out" }, 
+                0.95 
             );
         }, containerRef);
 
