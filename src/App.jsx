@@ -17,7 +17,7 @@ function App() {
         <>
             {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
             
-            <img className="global-bg" src="/bg.png" alt="" loading="eager" fetchPriority="high" decoding="async" />
+            <img className="global-bg" src="/bg.png?v=2" alt="" loading="eager" fetchPriority="high" decoding="async" />
             
             <CustomCursor />
             
