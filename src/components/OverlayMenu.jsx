@@ -141,9 +141,6 @@ const OverlayMenu = ({ isOpen, setIsMenuOpen }) => {
                     <div className="menu__item" data-text="UPDATES" data-img="/EC logo.png" onClick={(e) => handleNavigate(e, 'updates')}>
                         <a className="menu__item-link" href="#updates">UPDATES</a>
                     </div>
-                    <div className="menu__item" data-text="JOURNEY" data-img="/EC logo.png" onClick={(e) => handleNavigate(e, 'journey')}>
-                        <a className="menu__item-link" href="#journey">JOURNEY</a>
-                    </div>
                     <div className="menu__item" data-text="CONTACTS" data-img="/EC logo.png" onClick={(e) => handleNavigate(e, 'contacts')}>
                         <a className="menu__item-link" href="#contacts">CONTACTS</a>
                     </div>

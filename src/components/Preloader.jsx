@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export const TOTAL_FRAMES = 240;
+export const TOTAL_FRAMES = 241;
 export const EXTRA_ASSETS = [
     "/EC logo.png",
     "/Gallery/Design & Advisory Services.png?v=2",
@@ -39,9 +39,9 @@ const Preloader = ({ onComplete }) => {
 
         const loadFrame = async (i) => {
             const img = new Image();
-            const paddedIndex = i.toString().padStart(3, '0');
-            const extension = (i === 1 || i === TOTAL_FRAMES || i === TOTAL_FRAMES - 1) ? 'png' : 'jpg';
-            img.src = `/HeroSequence/ezgif-frame-${paddedIndex}.${extension}?v=2`;
+            const paddedIndex = i.toString().padStart(4, '0');
+            const extension = i >= 239 ? 'png' : 'jpg';
+            img.src = `/HeroSequence/frame_${paddedIndex}.${extension}?v=2`;
             
             try {
                 await img.decode();

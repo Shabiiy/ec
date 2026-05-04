@@ -1270,15 +1270,15 @@ video {
 
 .contact-title {
     font-family: 'BLT-Heirloom', serif;
-    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    font-size: clamp(1.6rem, 5vw, 2.8rem);
     color: var(--primary-brown);
     opacity: 1;
     text-align: center;
     letter-spacing: 0.1em;
     font-weight: bold;
     margin-bottom: 0;
-    margin-top: 30px;
-    z-index: 10; /* Middle layer: Content to be revealed */
+    margin-top: 20px;
+    z-index: 10;
     pointer-events: none;
 }
 
@@ -1288,25 +1288,25 @@ video {
     z-index: 15;
     pointer-events: all;
     width: 100%;
-    max-width: 450px; 
+    max-width: 340px;
     display: flex;
     flex-direction: column;
-    gap: 25px; /* Tighter gap */
-    background: rgba(248, 247, 242, 0.5); /* subtle glass */
+    gap: 14px;
+    background: rgba(248, 247, 242, 0.5);
     backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
-    padding: 40px; /* Reduced padding */
-    border-radius: 30px;
+    padding: 24px 28px;
+    border-radius: 20px;
     border: 1px solid rgba(255,255,255,0.4);
 }
 .minimal-input {
     background: transparent;
     border: none;
-    border-bottom: 2px solid var(--primary-green);
+    border-bottom: 1.5px solid var(--primary-green);
     color: var(--primary-brown);
     font-family: var(--font-body);
-    font-size: 1.2rem;
-    padding: 15px 0;
+    font-size: 0.9rem;
+    padding: 8px 0;
     outline: none;
     width: 100%;
     transform-origin: left bottom;
@@ -1316,10 +1316,10 @@ video {
 }
 .inline-inputs {
     display: flex;
-    gap: 40px;
+    gap: 20px;
 }
 .context-area {
-    min-height: 120px;
+    min-height: 70px;
     resize: vertical;
 }
 .minimal-submit {
@@ -1329,11 +1329,11 @@ video {
     color: var(--primary-brown);
     font-family: var(--font-body);
     font-weight: bold;
-    padding: 16px 45px;
-    font-size: 1.1rem;
+    padding: 10px 28px;
+    font-size: 0.85rem;
     letter-spacing: 2px;
     cursor: auto;
-    border-radius: 5px;
+    border-radius: 4px;
     transition: all 0.3s;
 }
 .minimal-submit:hover {
@@ -1343,18 +1343,51 @@ video {
 .custom-checkbox {
     display: flex;
     align-items: center;
-    gap: 15px;
-    font-size: 0.95rem;
+    gap: 10px;
+    font-size: 0.75rem;
     cursor: auto;
 }
 .custom-checkbox input {
     display: none;
 }
 .checkmark {
-    width: 22px;
-    height: 22px;
-    border: 2px solid var(--primary-green);
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid var(--primary-green);
     display: inline-block;
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    .contact-sec {
+        gap: 20px;
+    }
+    .contact-title {
+        font-size: clamp(1.8rem, 8vw, 2.5rem);
+        margin-top: 15px;
+        letter-spacing: 0.05em;
+    }
+    .contact-form {
+        max-width: 90%;
+        padding: 20px;
+        gap: 12px;
+        border-radius: 15px;
+    }
+    .inline-inputs {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .minimal-input {
+        padding: 10px 0;
+        font-size: 1rem;
+    }
+    .context-area {
+        min-height: 80px;
+    }
+    .minimal-submit {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
 }
 
 /* Hardware Acceleration for smooth scroll performance */
