@@ -1489,7 +1489,7 @@ video {
 
 .journey-card {
     position: absolute;
-    width: 600px;
+    width: 500px;
     pointer-events: auto;
 }
 
@@ -1501,10 +1501,10 @@ video {
 }
 
 .card-content {
-    padding: 20px;
+    padding: 15px;
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: 20px;
 }
 
 .card-text {
@@ -1514,31 +1514,31 @@ video {
 .card-year {
     font-family: 'Inter', sans-serif;
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: var(--primary-green);
     letter-spacing: 0.1em;
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .card-title {
     font-family: 'BLT-Heirloom', serif;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     color: #8A5A2B;
     line-height: 1.1;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
 }
 
 .card-desc {
     font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    line-height: 1.6;
+    font-size: 0.95rem;
+    line-height: 1.4;
     color: #8A5A2B;
     opacity: 0.8;
 }
 
 .card-image-wrapper {
-    width: 250px;
+    width: 200px;
     flex-shrink: 0;
 }
 
