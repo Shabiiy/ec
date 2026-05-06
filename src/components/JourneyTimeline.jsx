@@ -6,11 +6,11 @@ gsap.registerPlugin(ScrollTrigger);
 
 const JOURNEY_DATA = [
     { year: '2013', title: 'The Beginning', desc: 'Started with small residential and commercial projects.', image: '/assets/2013.png', imageWidth: '250px' },
-    { year: '2015', title: 'My first built project', desc: 'A breakthrough in sustainable residential architecture.', image: '/assets/2015 .png', imageWidth: '250px' },
+    { year: '2015', title: 'My first built project', desc: 'A breakthrough in sustainable residential architecture.', image: '/assets/2015 .png', imageWidth: '280px', topOffset: -10 },
     { year: '2018', title: 'Multi-building Complex', desc: 'Scaling our vision to a community-level ecosystem.', image: '/assets/2018.png', imageWidth: '150px' },
-    { year: '2019', title: 'Thomason Casa Building', desc: 'Winning international acclaim for biophilic integration.', image: '/assets/2019.png', imageWidth: '150px' },
+    { year: '2019', title: 'Thomason Casa Building', desc: 'Winning international acclaim for biophilic integration.', image: '/assets/2019.png', imageWidth: '200px' },
     { year: '2022', title: 'Kochi Expansion', desc: 'Bringing Earthcraft philosophies to the coastal landscape.', image: '/assets/2022.png', imageWidth: '250px' },
-    { year: '2025', title: 'Bangalore Project', desc: 'Redefining the urban skyline with living architectural skins.', image: '/assets/2025.png', imageWidth: '250px' },
+    { year: '2025', title: 'Bangalore Project', desc: 'Redefining the urban skyline with living architectural skins.', image: '/assets/2025.png', imageWidth: '280px', topOffset: 10 },
     { year: '2026', title: 'Design & Build Firm', desc: 'Building a South India based design and build firm.', image: '/assets/2026.png', imageWidth: '250px' }
 ];
 
@@ -134,7 +134,7 @@ const JourneyTimeline = () => {
                                 key={i} 
                                 ref={el => milestoneRefs.current[i] = el}
                                 className={`journey-card ${i % 2 === 0 ? 'left' : 'right'}`}
-                                style={{ top: `${(i / (JOURNEY_DATA.length - 1)) * 66 + 20}%` }}
+                                style={{ top: `${((i / (JOURNEY_DATA.length - 1)) * 66 + 20) + (item.topOffset || 0)}%` }}
                             >
                                 <div className="card-content">
                                     <div className="card-image-wrapper" style={{ width: item.imageWidth || undefined }}>
