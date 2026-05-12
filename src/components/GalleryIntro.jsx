@@ -24,7 +24,7 @@ const GalleryIntro = () => {
                 id: 'updates-trigger',
                 trigger: secRef.current,
                 start: "top top", 
-                end: "+=220%",        
+                end: "+=150%",        
                 pin: true,            
                 scrub: 0.5, 
                 fastScrollEnd: true,

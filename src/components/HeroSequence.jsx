@@ -133,7 +133,7 @@ const HeroSequence = () => {
                     id: 'hero-trigger',
                     trigger: containerRef.current,
                     start: 'top top',
-                    end: '+=4000%', // 4000% to provide plenty of scroll space for 4 smooth segments
+                    end: '+=2000%', // 60% of the original slowness
                     pin: true,
                     scrub: 0.4,
                     snap: {
@@ -199,10 +199,10 @@ const HeroSequence = () => {
             tl.addLabel("lock2", 4.6);
             tl.to({}, { duration: 0.6 });
 
-            // --- Segment 3: frames 121 -> 180 ---
+            // --- Segment 3: frames 121 -> 240 (merged without lock) ---
             tl.to(frameObj, { 
-                frame: 180, 
-                duration: 2, 
+                frame: 240, 
+                duration: 4, 
                 ease: "none", 
                 onUpdate: () => targetFrame.current = frameObj.frame 
             }, 5.2); 
@@ -212,28 +212,16 @@ const HeroSequence = () => {
                 { opacity: 0, y: -40, duration: 0.8, ease: "power2.in" }, 
                 5.4 
             );
-
-            // Lock 3 Pause
-            tl.addLabel("lock3", 7.2);
-            tl.to({}, { duration: 0.6 });
-
-            // --- Segment 4: frames 180 -> 240 ---
-            tl.to(frameObj, { 
-                frame: 240, 
-                duration: 2, 
-                ease: "none", 
-                onUpdate: () => targetFrame.current = frameObj.frame 
-            }, 7.8);
             
-            // 3rd text fades in at the end of Segment 4
+            // 3rd text fades in towards the end
             gsap.set(text3Ref.current, { opacity: 0, y: 20 });
             tl.to(text3Ref.current, 
                 { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, 
-                9.2
+                8.6
             );
 
-            // Final minor pause to establish the lock4 end state
-            tl.addLabel("lock4", 9.8);
+            // Final minor pause to establish the lock end state
+            tl.addLabel("lock4", 9.2);
             tl.to({}, { duration: 0.2 }); 
 
         }, containerRef);
